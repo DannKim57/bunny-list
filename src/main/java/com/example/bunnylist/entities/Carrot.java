@@ -4,12 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 public class Carrot {
-    private int id;
+    private String id;
     private Date carrotPlanted;
     private boolean onGoing; // on or off
     private String features;
     private List<String> rows;
-    private int bunnyId; // @Many to one .. I still don't create a getter and a setter for this one. 
+    private String bunnyId; // @Many to one .. I still don't create a getter and a setter for this one. 
 
     public Date getCarrotPlanted() {
         return carrotPlanted;
@@ -41,6 +41,14 @@ public class Carrot {
 
     public void setRows(List<String> rows) {
         this.rows = rows;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     

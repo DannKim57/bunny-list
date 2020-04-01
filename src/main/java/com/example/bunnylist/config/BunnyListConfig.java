@@ -11,14 +11,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class BunnyConfig {
-    private Logger logger = LoggerFactory.getLogger(BunnyConfig.class);
+public class BunnyListConfig {
+    private Logger logger = LoggerFactory.getLogger(BunnyListConfig.class);
 
-    @Bean
-    public Bunny bunny() {
-        logger.info("new Bunny created");
-        return new Bunny();
-    }
+
+    // @Bean
+    // public Bunny bunny(String id, String name) {
+    //     logger.info("new Bunny created");
+    //     return new Bunny(id, name);
+    // }
+
 
     @Bean
     public BunnyService bunnyService() {
@@ -26,11 +28,11 @@ public class BunnyConfig {
         return new BunnyService();
     }
 
-    @Bean
-    public Carrot carrot() {
-        logger.info("new Carrot created");
-        return new Carrot();
-    }
+    // @Bean
+    // public Carrot carrot() {
+    //     logger.info("new Carrot created");
+    //     return new Carrot();
+    // }
 
     @Bean
     public CarrotService carrotService() {

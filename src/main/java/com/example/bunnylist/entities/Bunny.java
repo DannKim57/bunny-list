@@ -10,13 +10,10 @@ import org.slf4j.LoggerFactory;
 
 @Entity
 public class Bunny {
-
-    private Logger logger = LoggerFactory.getLogger(Bunny.class);
     @Id
     private String id;
     private String name;
     private String description;
-    private List<Carrot> carrots;
 
     public Bunny() {}
     public Bunny(String id, String name) {
@@ -48,13 +45,6 @@ public class Bunny {
         this.description = description;
     }
     
-    public List<Carrot> getCarrots() {
-        return carrots;
-    }
-
-    public void setCarrots(List<Carrot> carrots) {
-        this.carrots = carrots;
-    }
 
     @Override
     public int hashCode() {
@@ -81,11 +71,10 @@ public class Bunny {
         return true;
     }
 
-
-    public void sayHi() {
-        logger.info("Hello! from " + id);
+    @Override
+    public String toString() {
+        return "Bunny [description=" + description + ", id=" + id + ", name=" + name + "]";
     }
-
 
     
     

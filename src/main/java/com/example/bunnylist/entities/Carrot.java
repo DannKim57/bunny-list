@@ -3,12 +3,17 @@ package com.example.bunnylist.entities;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Carrot {
+    @Id
     private String id;
     private Date carrotPlanted;
     private boolean onGoing; // on or off
     private String features;
-    private List<String> rows;
+    // private List<String> rows;
     private String bunnyId; // @Many to one .. I still don't create a getter and a setter for this one. 
 
     public Date getCarrotPlanted() {
@@ -35,13 +40,13 @@ public class Carrot {
         this.features = features;
     }
 
-    public List<String> getRows() {
-        return rows;
-    }
+    // public List<String> getRows() {
+    //     return rows;
+    // }
 
-    public void setRows(List<String> rows) {
-        this.rows = rows;
-    }
+    // public void setRows(List<String> rows) {
+    //     this.rows = rows;
+    // }
 
     public String getId() {
         return id;
@@ -49,6 +54,12 @@ public class Carrot {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Carrot [bunnyId=" + bunnyId + ", carrotPlanted=" + carrotPlanted + ", features=" + features + ", id="
+                + id + ", onGoing=" + onGoing + "]";
     }
 
     

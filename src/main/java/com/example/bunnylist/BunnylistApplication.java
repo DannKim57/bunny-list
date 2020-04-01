@@ -36,5 +36,5 @@ public class BunnylistApplication {
 
 		// SpringApplication.run(BunnylistApplication.class, args);
 	}
-
+ 
 }

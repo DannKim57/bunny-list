@@ -2,7 +2,13 @@ package com.example.bunnylist.entities;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Bunny {
+
+    private Logger logger = LoggerFactory.getLogger(Bunny.class);
+
     private int id;
     private String name;
     private String description;
@@ -42,7 +48,7 @@ public class Bunny {
         this.carrots = carrots;
     }
 
-    
+
     @Override
     public int hashCode() {
         final int prime = 31;

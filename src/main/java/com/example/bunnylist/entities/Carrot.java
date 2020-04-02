@@ -4,17 +4,21 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Carrot {
-    @Id
-    private String id;
+    
+    private long id;
     private Date carrotPlanted;
     private boolean onGoing; // on or off
     private String features;
     // private List<String> rows;
-    private String bunnyId; // @Many to one .. I still don't create a getter and a setter for this one. 
+    private Bunny bunny; 
 
     public Date getCarrotPlanted() {
         return carrotPlanted;
@@ -48,19 +52,26 @@ public class Carrot {
     //     this.rows = rows;
     // }
 
-    public String getId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "Carrot [bunnyId=" + bunnyId + ", carrotPlanted=" + carrotPlanted + ", features=" + features + ", id="
-                + id + ", onGoing=" + onGoing + "]";
+
+    @ManyToOne
+    @JoinColumn(name = "Bunny_ID", nullable = false)
+    public Bunny getBunny() {
+        return bunny;
     }
+
+    public void setBunny(Bunny bunny) {
+        this.bunny = bunny;
+    } 
 
     
 }

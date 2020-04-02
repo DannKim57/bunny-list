@@ -2,28 +2,35 @@ package com.example.bunnylist.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 
 @Entity
 public class Bunny {
-    @Id
-    private String id;
+    
+    private long id;
     private String name;
     private String description;
+    private List<Carrot> carrots;
 
     public Bunny() {}
-    public Bunny(String id, String name) {
-        this.id = id;
+    public Bunny(String name, String description) {
         this.name = name;
+        this.description = description;
     }
 
-    public String getId() {
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -44,11 +51,27 @@ public class Bunny {
     }
     
 
+    
+
+    @Override
+    public String toString() {
+        return "Bunny [description=" + description + ", id=" + id + ", name=" + name + "]";
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bunny")
+    public List<Carrot> getCarrots() {
+        return carrots;
+    }
+
+    public void setCarrots(List<Carrot> carrots) {
+        this.carrots = carrots;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + (int) (id ^ (id >>> 32));
         return result;
     }
 
@@ -61,17 +84,9 @@ public class Bunny {
         if (getClass() != obj.getClass())
             return false;
         Bunny other = (Bunny) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
+        if (id != other.id)
             return false;
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Bunny [description=" + description + ", id=" + id + ", name=" + name + "]";
     }
 
     

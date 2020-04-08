@@ -1,28 +1,30 @@
 package com.example.bunnylist.entities;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 
 @Entity
-public class Bunny {
+@Table(name= "bunnies")
+public class Bunny implements Serializable{
     
     private long id;
-    private String name;
-    private String description;
+    private String title;
+    private String where;
+    private LocalDate startDate;
     private List<Carrot> carrots;
 
-    public Bunny() {}
-    public Bunny(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
@@ -34,29 +36,16 @@ public class Bunny {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    @Column(name = "title")
+    @NotEmpty
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
     
-    public String getDescription() {
-        return description;
-    }
-    
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    
-
-    
-
-    @Override
-    public String toString() {
-        return "Bunny [description=" + description + ", id=" + id + ", name=" + name + "]";
-    }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bunny")
     public List<Carrot> getCarrots() {
@@ -65,6 +54,25 @@ public class Bunny {
 
     public void setCarrots(List<Carrot> carrots) {
         this.carrots = carrots;
+    }
+
+    @Column(name = "where")
+    public String getWhere() {
+        return where;
+    }
+
+    public void setWhere(String where) {
+        this.where = where;
+    }
+
+    @Column(name = "startDate")
+    @NotEmpty
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
     @Override
@@ -89,6 +97,11 @@ public class Bunny {
         return true;
     }
 
+
+    @Override
+    public String toString() {
+        return "Bunny [where=" + where + ", id=" + id + ", title=" + title + "]";
+    }
     
     
 }

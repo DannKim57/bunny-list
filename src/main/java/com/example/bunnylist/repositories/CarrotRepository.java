@@ -4,4 +4,4 @@ import com.example.bunnylist.entities.Carrot;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface CarrotRepository extends CrudRepository<Carrot, String>{}
+public interface CarrotRepository extends CrudRepository<Carrot, Long>{}

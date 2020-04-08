@@ -4,4 +4,4 @@ import com.example.bunnylist.entities.Bunny;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface BunnyRepository extends CrudRepository<Bunny, String>{}
+public interface BunnyRepository extends CrudRepository<Bunny, Long>{}

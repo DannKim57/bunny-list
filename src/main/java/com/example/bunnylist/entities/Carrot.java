@@ -1,56 +1,34 @@
 package com.example.bunnylist.entities;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-public class Carrot {
+@Table(name= "carrots")
+public class Carrot implements Serializable {
     
     private long id;
-    private Date carrotPlanted;
-    private boolean onGoing; // on or off
-    private String features;
-    // private List<String> rows;
+    private LocalDate startDate;
+    private CarrotType type;
     private Bunny bunny; 
+    private Set<Todo> todos = new LinkedHashSet<>();
 
-    public Date getCarrotPlanted() {
-        return carrotPlanted;
-    }
-
-    public void setCarrotPlanted(Date carrotPlanted) {
-        this.carrotPlanted = carrotPlanted;
-    }
-
-    public boolean isOnGoing() {
-        return onGoing;
-    }
-
-    public void setOnGoing(boolean onGoing) {
-        this.onGoing = onGoing;
-    }
-
-    public String getFeatures() {
-        return features;
-    }
-
-    public void setFeatures(String features) {
-        this.features = features;
-    }
-
-    // public List<String> getRows() {
-    //     return rows;
-    // }
-
-    // public void setRows(List<String> rows) {
-    //     this.rows = rows;
-    // }
+    
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
@@ -71,7 +49,36 @@ public class Carrot {
 
     public void setBunny(Bunny bunny) {
         this.bunny = bunny;
-    } 
+    }
+
+    @Column(name = "startDate")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "typeId")
+    public CarrotType getType() {
+        return type;
+    }
+
+    public void setType(CarrotType type) {
+        this.type = type;
+    }
+
+    @Transient
+    public Set<Todo> getTodos() {
+        return todos;
+    }
+
+    public void setTodos(Set<Todo> todos) {
+        this.todos = todos;
+    }
 
     
 }

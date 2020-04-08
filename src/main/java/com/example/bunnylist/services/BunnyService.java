@@ -24,7 +24,7 @@ public class BunnyService {
         return bunnies;
     }
 
-    public Bunny getBunny(String id) {
+    public Bunny getBunny(Long id) {
         return bunnyRepository.findById(id).get();
     }
 
@@ -36,7 +36,7 @@ public class BunnyService {
         bunnyRepository.save(bunny);
     }
     
-    public void deleteBunny(String id) {
+    public void deleteBunny(Long id) {
         bunnyRepository.delete(getBunny(id));
     }
     

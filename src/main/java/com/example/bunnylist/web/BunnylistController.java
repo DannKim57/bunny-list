@@ -32,7 +32,7 @@ public class BunnylistController {
     }
 
     @GetMapping("/bunnies/{id}")
-    public Bunny findBunnyById(@PathVariable String id) {
+    public Bunny findBunnyById(@PathVariable Long id) {
         return bunnyService.getBunny(id);
     }
 
@@ -47,7 +47,7 @@ public class BunnylistController {
     }
 
     @DeleteMapping("/bunnies/{id}")
-    public void deleteBunny(@PathVariable String id) {
+    public void deleteBunny(@PathVariable Long id) {
         bunnyService.deleteBunny(id);
     }
 

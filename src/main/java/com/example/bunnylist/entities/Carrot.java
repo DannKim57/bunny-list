@@ -22,7 +22,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name= "carrots")
 public class Carrot implements Serializable {
     
-    private long id;
+    private Long id;
     private LocalDate startDate;
     private CarrotType type;
     private Bunny bunny; 
@@ -32,17 +32,17 @@ public class Carrot implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
 
     @ManyToOne
-    @JoinColumn(name = "Bunny_ID", nullable = false)
+    @JoinColumn(name = "bunnyId", nullable = false)
     public Bunny getBunny() {
         return bunny;
     }

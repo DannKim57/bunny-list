@@ -19,7 +19,7 @@ import javax.validation.constraints.NotEmpty;
 @Table(name= "bunnies")
 public class Bunny implements Serializable{
     
-    private long id;
+    private Long id;
     private String title;
     private String where;
     private LocalDate startDate;
@@ -28,7 +28,7 @@ public class Bunny implements Serializable{
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

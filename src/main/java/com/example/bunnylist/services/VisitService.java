@@ -1,5 +1,5 @@
 package com.example.bunnylist.services;
 
-public class TodoService {
+public class VisitService {
 
 }

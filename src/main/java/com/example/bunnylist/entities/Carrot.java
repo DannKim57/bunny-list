@@ -2,8 +2,12 @@ package com.example.bunnylist.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -16,6 +20,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.beans.support.MutableSortDefinition;
+import org.springframework.beans.support.PropertyComparator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -23,10 +29,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Carrot implements Serializable {
     
     private Long id;
+    private String name;
     private LocalDate startDate;
     private CarrotType type;
     private Bunny bunny; 
-    private Set<Todo> todos = new LinkedHashSet<>();
+    private Set<Visit> visits = new LinkedHashSet<>();
 
     
 
@@ -38,6 +45,15 @@ public class Carrot implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Column(name = "name")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 
@@ -71,14 +87,32 @@ public class Carrot implements Serializable {
         this.type = type;
     }
 
-    @Transient
-    public Set<Todo> getTodos() {
-        return todos;
+    public Set<Visit> getVisitsInternal() {
+        if (this.visits == null) {
+            this.visits = new HashSet<>();
+        } 
+        return this.visits;
     }
 
-    public void setTodos(Set<Todo> todos) {
-        this.todos = todos;
+    public void setVisitsInternal(Collection<Visit> visits) {
+		this.visits = new LinkedHashSet<>(visits);
+	}
+
+    @Transient
+	public List<Visit> getVisits() {
+		List<Visit> sortedVisits = new ArrayList<>(getVisitsInternal());
+		PropertyComparator.sort(sortedVisits, new MutableSortDefinition("date", false, false));
+		return Collections.unmodifiableList(sortedVisits);
+	}
+
+	public void addVisit(Visit visit) {
+		getVisitsInternal().add(visit);
+		visit.setCarrotId(this.getId());
     }
+    
+    public boolean isNew() {
+		return this.id == null;
+	}
 
     
 }

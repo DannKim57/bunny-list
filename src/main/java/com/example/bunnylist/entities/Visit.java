@@ -13,15 +13,15 @@ import javax.validation.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "todos")
-public class Todo {
+@Table(name = "visits")
+public class Visit {
     private long id;
-    private LocalDate startDate;
+    private LocalDate date;
     private String description;
     private long carrotId;
 
-    public Todo() {
-        this.startDate = LocalDate.now();
+    public Visit() {
+        this.date = LocalDate.now();
     }
 
     @Id
@@ -38,11 +38,11 @@ public class Todo {
     @Column(name = "startDate")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     public LocalDate getStartDate() {
-        return startDate;
+        return date;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public void setStartDate(LocalDate date) {
+        this.date = date;
     }
 
     @NotEmpty

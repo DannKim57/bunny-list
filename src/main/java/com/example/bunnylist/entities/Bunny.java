@@ -2,7 +2,11 @@ package com.example.bunnylist.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,6 +18,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import org.springframework.beans.support.MutableSortDefinition;
+import org.springframework.beans.support.PropertyComparator;
+
 
 @Entity
 @Table(name= "bunnies")
@@ -23,7 +30,7 @@ public class Bunny implements Serializable{
     private String title;
     private String where;
     private LocalDate startDate;
-    private List<Carrot> carrots;
+    private Set<Carrot> carrots;
 
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,15 +52,51 @@ public class Bunny implements Serializable{
     public void setTitle(String title) {
         this.title = title;
     }
+
+    protected Set<Carrot> getCarrotsInternal() {
+		if (this.carrots == null) {
+			this.carrots = new HashSet<>();
+		}
+		return this.carrots;
+	}
+
+	protected void setCarrotsInternal(Set<Carrot> carrots) {
+		this.carrots = carrots;
+	}
     
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bunny")
     public List<Carrot> getCarrots() {
-        return carrots;
+        List<Carrot> sortedCarrots = new ArrayList<>(getCarrotsInternal());
+        PropertyComparator.sort(sortedCarrots, new MutableSortDefinition("name", true, true));
+        return Collections.unmodifiableList(sortedCarrots);
     }
 
-    public void setCarrots(List<Carrot> carrots) {
-        this.carrots = carrots;
+    public void addCarrot(Carrot carrot) {
+        if (carrot.isNew()) {
+            getCarrotsInternal().add(carrot);
+        }
+        carrot.setBunny(this);
+	}
+    
+
+
+    public Carrot getCarrot(String name) {
+        return getCarrot(name, false);
+    }
+
+    public Carrot getCarrot(String name, boolean ignoreNew) {
+        name = name.toLowerCase();
+        for (Carrot carrot : getCarrotsInternal()) {
+            if (!ignoreNew || !carrot.isNew()) {
+                String compName = carrot.getName();
+                compName = compName.toLowerCase();
+                if (compName.equals(name)) {
+                    return carrot;
+                }
+            }
+        }
+        return null;
     }
 
     @Column(name = "_where")
@@ -74,6 +117,10 @@ public class Bunny implements Serializable{
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
+
+    public boolean isNew() {
+		return this.id == null;
+	}
 
     @Override
     public int hashCode() {

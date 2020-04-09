@@ -26,7 +26,7 @@ public class Bunny implements Serializable{
     private List<Carrot> carrots;
 
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     public Long getId() {
         return id;
@@ -36,7 +36,7 @@ public class Bunny implements Serializable{
         this.id = id;
     }
 
-    @Column(name = "title")
+    @Column(name = "_title")
     @NotEmpty
     public String getTitle() {
         return title;
@@ -56,7 +56,7 @@ public class Bunny implements Serializable{
         this.carrots = carrots;
     }
 
-    @Column(name = "where")
+    @Column(name = "_where")
     public String getWhere() {
         return where;
     }
@@ -65,7 +65,7 @@ public class Bunny implements Serializable{
         this.where = where;
     }
 
-    @Column(name = "startDate")
+    @Column(name = "start_Date")
     @NotEmpty
     public LocalDate getStartDate() {
         return startDate;

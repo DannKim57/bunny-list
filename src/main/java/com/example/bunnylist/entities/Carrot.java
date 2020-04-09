@@ -30,7 +30,7 @@ public class Carrot implements Serializable {
 
     
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     public Long getId() {
         return id;
@@ -42,7 +42,7 @@ public class Carrot implements Serializable {
 
 
     @ManyToOne
-    @JoinColumn(name = "bunnyId", nullable = false)
+    @JoinColumn(name = "bunny_Id", nullable = false)
     public Bunny getBunny() {
         return bunny;
     }
@@ -51,7 +51,7 @@ public class Carrot implements Serializable {
         this.bunny = bunny;
     }
 
-    @Column(name = "startDate")
+    @Column(name = "start_Date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     public LocalDate getStartDate() {
         return startDate;
@@ -62,7 +62,7 @@ public class Carrot implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "typeId")
+    @JoinColumn(name = "type_Id")
     public CarrotType getType() {
         return type;
     }

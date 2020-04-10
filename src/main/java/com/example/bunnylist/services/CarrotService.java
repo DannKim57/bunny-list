@@ -64,7 +64,7 @@ public class CarrotService {
         dataBinder.setDisallowedFields("id");
     }
 
-    public void initPetBinder(WebDataBinder dataBinder) {
+    public void initCarrotBinder(WebDataBinder dataBinder) {
         dataBinder.setValidator(new CarrotValidator());
     }
 
@@ -85,7 +85,7 @@ public class CarrotService {
             return VIEWS_CARROTS_CREATE_OR_UPDATE_FORM;
         } else {
             carrotRepository.save(carrot);
-            return "redirect:/bunnies/"; // + {bunnyId}
+            return "redirect:/bunnies/{bunnyId}"; // + {bunnyId}
         }
     }
 
@@ -103,7 +103,7 @@ public class CarrotService {
         } else {
             bunny.addCarrot(carrot);
             carrotRepository.save(carrot);
-            return "redirect:/bunnies/"; // + {bunnyId}
+            return "redirect:/bunnies/{bunnyId}"; // + {bunnyId}
         }
     }
 

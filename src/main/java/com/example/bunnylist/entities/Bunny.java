@@ -26,15 +26,21 @@ import org.springframework.beans.support.PropertyComparator;
 @Table(name= "bunnies")
 public class Bunny implements Serializable{
     
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private Long id;
+    @Column(name = "_title")
+    @NotEmpty
     private String title;
+    @Column(name = "_where")
     private String where;
+    @Column(name = "start_Date")
+    @NotEmpty
     private LocalDate startDate;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bunny")
     private Set<Carrot> carrots;
 
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
     public Long getId() {
         return id;
     }
@@ -43,8 +49,6 @@ public class Bunny implements Serializable{
         this.id = id;
     }
 
-    @Column(name = "_title")
-    @NotEmpty
     public String getTitle() {
         return title;
     }
@@ -64,8 +68,6 @@ public class Bunny implements Serializable{
 		this.carrots = carrots;
 	}
     
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bunny")
     public List<Carrot> getCarrots() {
         List<Carrot> sortedCarrots = new ArrayList<>(getCarrotsInternal());
         PropertyComparator.sort(sortedCarrots, new MutableSortDefinition("name", true, true));
@@ -99,7 +101,6 @@ public class Bunny implements Serializable{
         return null;
     }
 
-    @Column(name = "_where")
     public String getWhere() {
         return where;
     }
@@ -108,8 +109,6 @@ public class Bunny implements Serializable{
         this.where = where;
     }
 
-    @Column(name = "start_Date")
-    @NotEmpty
     public LocalDate getStartDate() {
         return startDate;
     }

@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface CarrotRepository extends CrudRepository<Carrot, Long>{
     
-    @Query("SELECT ctype FROM CarrotType ctype ORDER BY ctype.name")
+    @Query("SELECT ctype FROM CarrotType ctype ORDER BY ctype.name") // Or Type instead of CarrotType
     @Transactional
     List<CarrotType> findCarrotTypes();
 }

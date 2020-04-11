@@ -10,16 +10,16 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "types")
 public class CarrotType {
-	private long id;
+	private Long id;
 	private String name;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

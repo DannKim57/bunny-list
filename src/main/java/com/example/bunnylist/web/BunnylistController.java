@@ -1,7 +1,6 @@
 package com.example.bunnylist.web;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -19,14 +18,11 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -43,30 +39,30 @@ public class BunnylistController {
     //     super();
     // }
 
-    @GetMapping("/bunnies")
-    public List<Bunny> findAllBunny() {
-        return bunnyService.getAllBunnies();
-    }
+    // @GetMapping("/bunnies")
+    // public List<Bunny> findAllBunny() {
+    //     return bunnyService.getAllBunnies();
+    // }
 
-    @GetMapping("/bunnies/{id}")
-    public Bunny findBunnyById(@PathVariable Long id) {
-        return bunnyService.getBunny(id);
-    }
+    // @GetMapping("/bunnies/{id}")
+    // public Bunny findBunnyById(@PathVariable Long id) {
+    //     return bunnyService.getBunny(id);
+    // }
 
-    @PostMapping("/bunnies")
-    public void addBunny(@RequestBody Bunny bunny) {
-        bunnyService.addBunny(bunny);
-    }
+    // @PostMapping("/bunnies")
+    // public void addBunny(@RequestBody Bunny bunny) {
+    //     bunnyService.addBunny(bunny);
+    // }
 
-    @PutMapping("/bunnies/{id}")
-    public void updateBunny(@RequestBody Bunny bunny, @PathVariable String id) {
-        bunnyService.addBunny(bunny);
-    }
+    // @PutMapping("/bunnies/{id}")
+    // public void updateBunny(@RequestBody Bunny bunny, @PathVariable String id) {
+    //     bunnyService.addBunny(bunny);
+    // }
 
-    @DeleteMapping("/bunnies/{id}")
-    public void deleteBunny(@PathVariable Long id) {
-        bunnyService.deleteBunny(id);
-    }
+    // @DeleteMapping("/bunnies/{id}")
+    // public void deleteBunny(@PathVariable Long id) {
+    //     bunnyService.deleteBunny(id);
+    // }
 
     @InitBinder
     public void setAllowedFields(WebDataBinder dataBinder) {

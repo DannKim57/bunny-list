@@ -15,28 +15,32 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name = "visits")
 public class Visit {
-    private long id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @Column(name = "startDate")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
+    @NotEmpty
+    @Column(name = "description")
     private String description;
-    private long carrotId;
+    @Column(name = "carrotId")
+    private Long carrotId;
 
     public Visit() {
         this.date = LocalDate.now();
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     
-    @Column(name = "startDate")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public LocalDate getStartDate() {
         return date;
     }
@@ -45,8 +49,6 @@ public class Visit {
         this.date = date;
     }
 
-    @NotEmpty
-    @Column(name = "description")
     public String getDescription() {
         return description;
     }
@@ -55,12 +57,11 @@ public class Visit {
         this.description = description;
     }
 
-    @Column(name = "carrotId")
-    public long getCarrotId() {
+    public Long getCarrotId() {
         return carrotId;
     }
 
-    public void setCarrotId(long carrotId) {
+    public void setCarrotId(Long carrotId) {
         this.carrotId = carrotId;
     }
 

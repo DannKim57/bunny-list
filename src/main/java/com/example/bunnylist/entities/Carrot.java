@@ -28,17 +28,25 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name= "carrots")
 public class Carrot implements Serializable {
     
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "start_Date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
+    @ManyToOne
+    @JoinColumn(name = "type_Id")
     private CarrotType type;
+    @ManyToOne
+    @JoinColumn(name = "bunny_Id", nullable = false)
     private Bunny bunny; 
+    @Transient
     private Set<Visit> visits = new LinkedHashSet<>();
 
     
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
     public Long getId() {
         return id;
     }
@@ -47,7 +55,6 @@ public class Carrot implements Serializable {
         this.id = id;
     }
 
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -57,8 +64,6 @@ public class Carrot implements Serializable {
     }
 
 
-    @ManyToOne
-    @JoinColumn(name = "bunny_Id", nullable = false)
     public Bunny getBunny() {
         return bunny;
     }
@@ -67,8 +72,6 @@ public class Carrot implements Serializable {
         this.bunny = bunny;
     }
 
-    @Column(name = "start_Date")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public LocalDate getStartDate() {
         return startDate;
     }
@@ -77,8 +80,6 @@ public class Carrot implements Serializable {
         this.startDate = startDate;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "type_Id")
     public CarrotType getType() {
         return type;
     }
@@ -87,7 +88,7 @@ public class Carrot implements Serializable {
         this.type = type;
     }
 
-    public Set<Visit> getVisitsInternal() {
+    protected Set<Visit> getVisitsInternal() {
         if (this.visits == null) {
             this.visits = new HashSet<>();
         } 
@@ -98,7 +99,6 @@ public class Carrot implements Serializable {
 		this.visits = new LinkedHashSet<>(visits);
 	}
 
-    @Transient
 	public List<Visit> getVisits() {
 		List<Visit> sortedVisits = new ArrayList<>(getVisitsInternal());
 		PropertyComparator.sort(sortedVisits, new MutableSortDefinition("date", false, false));

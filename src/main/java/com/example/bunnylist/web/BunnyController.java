@@ -57,7 +57,7 @@ public class BunnyController {
     @GetMapping("/bunnies/find")
     public String initFindForm(Map<String, Object> model) {
         model.put("bunny", new Bunny());
-        return "bunnies/findOwners";
+        return "bunnies/findBunnies";
     } 
 
     @GetMapping("/bunnies")
@@ -103,7 +103,7 @@ public class BunnyController {
                     }
     }
 
-    @GetMapping("/bunnies/{bunnyId}") 
+    @GetMapping("/bunnies/{bunnyId}")  // need to fix!
     public ModelAndView showBunny(@PathVariable("bunnyId") Long bunnyId) {
         ModelAndView mav = new ModelAndView("bunnies/bunnyDetails");
         Bunny bunny = bunnyRepository.findById(bunnyId).get();

@@ -11,6 +11,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,7 +40,7 @@ public class Bunny implements Serializable{
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotEmpty
     private LocalDate startDate;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bunny")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "bunny")
     private Set<Carrot> carrots;
 
 

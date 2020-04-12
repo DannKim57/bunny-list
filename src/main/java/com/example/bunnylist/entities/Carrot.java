@@ -25,77 +25,79 @@ import org.springframework.beans.support.PropertyComparator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name= "carrots")
+@Table(name = "carrots")
 public class Carrot implements Serializable {
-    
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    private Long id;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "start_Date")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate startDate;
-    @ManyToOne
-    @JoinColumn(name = "type_Id")
-    private CarrotType type;
-    @ManyToOne
-    @JoinColumn(name = "bunny_Id", nullable = false)
-    private Bunny bunny; 
-    @Transient
-    private Set<Visit> visits = new LinkedHashSet<>();
 
-    
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	private Long id;
 
-    public Long getId() {
-        return id;
-    }
+	@Column(name = "name")
+	private String name;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@Column(name = "start_Date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate startDate;
 
-    public String getName() {
-        return name;
-    }
+	@ManyToOne
+	@JoinColumn(name = "type_Id")
+	private CarrotType type;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	@ManyToOne
+	@JoinColumn(name = "bunny_Id", nullable = false)
+	private Bunny bunny;
 
+	@Transient
+	private Set<Visit> visits = new LinkedHashSet<>();
 
-    public Bunny getBunny() {
-        return bunny;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setBunny(Bunny bunny) {
-        this.bunny = bunny;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public LocalDate getStartDate() {
-        return startDate;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public CarrotType getType() {
-        return type;
-    }
+	public Bunny getBunny() {
+		return bunny;
+	}
 
-    public void setType(CarrotType type) {
-        this.type = type;
-    }
+	public void setBunny(Bunny bunny) {
+		this.bunny = bunny;
+	}
 
-    protected Set<Visit> getVisitsInternal() {
-        if (this.visits == null) {
-            this.visits = new HashSet<>();
-        } 
-        return this.visits;
-    }
+	public LocalDate getStartDate() {
+		return startDate;
+	}
 
-    public void setVisitsInternal(Collection<Visit> visits) {
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
+	}
+
+	public CarrotType getType() {
+		return type;
+	}
+
+	public void setType(CarrotType type) {
+		this.type = type;
+	}
+
+	protected Set<Visit> getVisitsInternal() {
+		if (this.visits == null) {
+			this.visits = new HashSet<>();
+		}
+		return this.visits;
+	}
+
+	public void setVisitsInternal(Collection<Visit> visits) {
 		this.visits = new LinkedHashSet<>(visits);
 	}
 
@@ -108,11 +110,10 @@ public class Carrot implements Serializable {
 	public void addVisit(Visit visit) {
 		getVisitsInternal().add(visit);
 		visit.setCarrotId(this.getId());
-    }
-    
-    public boolean isNew() {
+	}
+
+	public boolean isNew() {
 		return this.id == null;
 	}
 
-    
 }

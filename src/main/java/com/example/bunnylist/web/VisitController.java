@@ -21,41 +21,44 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class VisitController {
 
-    private final VisitRepository visitRepository;
-    private final CarrotRepository carrotRepository;
+	private final VisitRepository visitRepository;
 
-    public VisitController(VisitRepository visitRepository, CarrotRepository carrotRepository) {
-        this.visitRepository = visitRepository;
-        this.carrotRepository = carrotRepository;
-    }
+	private final CarrotRepository carrotRepository;
 
-    @InitBinder
-    public void setAllowedFields(WebDataBinder dataBinder) { // ** 
-        dataBinder.setDisallowedFields("id");
-    }
+	public VisitController(VisitRepository visitRepository, CarrotRepository carrotRepository) {
+		this.visitRepository = visitRepository;
+		this.carrotRepository = carrotRepository;
+	}
 
-    @ModelAttribute("visit")
-    public Visit loadCarrotWithVisit(@PathVariable("carrotId") Long carrotId, Map<String, Object> model) {
-        Carrot carrot = carrotRepository.findById(carrotId).get();
-        carrot.setVisitsInternal(visitRepository.findByCarrotId(carrotId));
-        model.put("carrot", carrot);
-        Visit visit = new Visit();
-        carrot.addVisit(visit);
-        return visit;
-    }
+	@InitBinder
+	public void setAllowedFields(WebDataBinder dataBinder) { // **
+		dataBinder.setDisallowedFields("id");
+	}
 
-    @GetMapping("/bunnies/*/carrots/{carrotId}/visits/new")
-    public String initNewVisitForm(@PathVariable("carrotId") Long carrotId, Map<String, Object> model) {
-        return "carrots/createOrUpdateVisitForm";
-    }
+	@ModelAttribute("visit")
+	public Visit loadCarrotWithVisit(@PathVariable("carrotId") Long carrotId, Map<String, Object> model) {
+		Carrot carrot = carrotRepository.findById(carrotId).get();
+		carrot.setVisitsInternal(visitRepository.findByCarrotId(carrotId));
+		model.put("carrot", carrot);
+		Visit visit = new Visit();
+		carrot.addVisit(visit);
+		return visit;
+	}
 
-    @PostMapping("/bunnies/{bunnyId}/carrots/{carrotId}/visits/new")
-    public String processNewVisitForm(@Valid Visit visit, BindingResult result) {
-        if (result.hasErrors()) {
-            return "carrots/createOrUpdateVisitForm";
-        } else {
-            visitRepository.save(visit);
-            return "redirect:/bunnies/{bunnyId}"; // + {bunnyId}
-        }
-    }
+	@GetMapping("/bunnies/*/carrots/{carrotId}/visits/new")
+	public String initNewVisitForm(@PathVariable("carrotId") Long carrotId, Map<String, Object> model) {
+		return "carrots/createOrUpdateVisitForm";
+	}
+
+	@PostMapping("/bunnies/{bunnyId}/carrots/{carrotId}/visits/new")
+	public String processNewVisitForm(@Valid Visit visit, BindingResult result) {
+		if (result.hasErrors()) {
+			return "carrots/createOrUpdateVisitForm";
+		}
+		else {
+			visitRepository.save(visit);
+			return "redirect:/bunnies/{bunnyId}"; // + {bunnyId}
+		}
+	}
+
 }

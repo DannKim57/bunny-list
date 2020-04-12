@@ -22,6 +22,7 @@ class BunnylistApplicationTests {
 
 	@Autowired
 	BunnyRepository bunnyRepository;
+
 	@Autowired
 	CarrotRepository carrotRepository;
 
@@ -30,10 +31,10 @@ class BunnylistApplicationTests {
 		List<Bunny> bunnyList = bunnyRepository.findByTitle("Amy");
 		Bunny bunny1 = new Bunny();
 		// for (int i = 0; i < bunnyList.size(); i++) {
-		// 	if (!bunnyList.isEmpty()) {
-		// 		// assertNull(bunnyList.get(i));
-		// 		bunny1 = bunnyList.get(i);
-		// 	}
+		// if (!bunnyList.isEmpty()) {
+		// // assertNull(bunnyList.get(i));
+		// bunny1 = bunnyList.get(i);
+		// }
 		// }
 		assertEquals(5, bunnyList.get(0).getId(), "bunny Id");
 	}
@@ -43,6 +44,5 @@ class BunnylistApplicationTests {
 		List<CarrotType> carrotList = carrotRepository.findCarrotTypes();
 		assertEquals("cat", carrotList.get(1).getName(), "what is the name?");
 	}
-
 
 }

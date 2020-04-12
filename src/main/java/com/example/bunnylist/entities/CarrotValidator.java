@@ -4,9 +4,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-public class CarrotValidator implements Validator{
+public class CarrotValidator implements Validator {
 
-    private static final String REQUIRED = "required";
+	private static final String REQUIRED = "required";
 
 	@Override
 	public void validate(Object obj, Errors errors) {
@@ -35,4 +35,5 @@ public class CarrotValidator implements Validator{
 	public boolean supports(Class<?> clazz) {
 		return Carrot.class.isAssignableFrom(clazz);
 	}
+
 }

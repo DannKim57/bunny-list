@@ -11,20 +11,21 @@ import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CarrotTypeFormatter implements Formatter<CarrotType>{
-    private final CarrotRepository carrotRepository;
+public class CarrotTypeFormatter implements Formatter<CarrotType> {
 
-    @Autowired
-    public CarrotTypeFormatter(CarrotRepository carrotRepository) {
-        this.carrotRepository = carrotRepository;
-    }
+	private final CarrotRepository carrotRepository;
 
-    @Override
-    public String print(CarrotType carrotType, Locale locale) {
-        return carrotType.getName();
-    }
+	@Autowired
+	public CarrotTypeFormatter(CarrotRepository carrotRepository) {
+		this.carrotRepository = carrotRepository;
+	}
 
-    @Override
+	@Override
+	public String print(CarrotType carrotType, Locale locale) {
+		return carrotType.getName();
+	}
+
+	@Override
 	public CarrotType parse(String text, Locale locale) throws ParseException {
 		Collection<CarrotType> findCarrotTypes = this.carrotRepository.findCarrotTypes();
 		for (CarrotType type : findCarrotTypes) {
@@ -35,6 +36,4 @@ public class CarrotTypeFormatter implements Formatter<CarrotType>{
 		throw new ParseException("type not found: " + text, 0);
 	}
 
-    
-    
 }

@@ -10,7 +10,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "types")
 public class CarrotType {
+
 	private Long id;
+
 	private String name;
 
 	@Id
@@ -37,5 +39,4 @@ public class CarrotType {
 		return this.getName();
 	}
 
-	
 }

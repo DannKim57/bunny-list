@@ -16,55 +16,55 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "visits")
 public class Visit {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @Column(name = "startDate")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate date;
-    @NotEmpty
-    @Column(name = "description")
-    private String description;
-    @Column(name = "carrot_id")
-    private Long carrotId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-    public Visit() {
-        this.date = LocalDate.now();
-    }
+	@Column(name = "startDate")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate date;
 
-    public Long getId() {
-        return id;
-    }
+	@NotEmpty
+	@Column(name = "description")
+	private String description;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@Column(name = "carrot_id")
+	private Long carrotId;
 
-    
-    public LocalDate getStartDate() {
-        return date;
-    }
+	public Visit() {
+		this.date = LocalDate.now();
+	}
 
-    public void setStartDate(LocalDate date) {
-        this.date = date;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public LocalDate getStartDate() {
+		return date;
+	}
 
-    public Long getCarrotId() {
-        return carrotId;
-    }
+	public void setStartDate(LocalDate date) {
+		this.date = date;
+	}
 
-    public void setCarrotId(Long carrotId) {
-        this.carrotId = carrotId;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    
-    
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Long getCarrotId() {
+		return carrotId;
+	}
+
+	public void setCarrotId(Long carrotId) {
+		this.carrotId = carrotId;
+	}
+
 }

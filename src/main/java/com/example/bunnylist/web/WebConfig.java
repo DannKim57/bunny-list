@@ -1,4 +1,5 @@
 package com.example.bunnylist.web;
 
-public class WebConfig{    
+public class WebConfig {
+
 }

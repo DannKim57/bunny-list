@@ -20,93 +20,95 @@ import org.springframework.web.bind.WebDataBinder;
 
 @Service
 public class CarrotService {
-    // private Logger logger = LoggerFactory.getLogger(BunnyService.class);
 
-    private static final String VIEWS_CARROTS_CREATE_OR_UPDATE_FORM = "carrots/createOrUpdateCarrotForm";
+	// private Logger logger = LoggerFactory.getLogger(BunnyService.class);
 
-    
-    @Autowired
-    private BunnyRepository bunnyRepository;
-    @Autowired
-    private CarrotRepository carrotRepository;
+	private static final String VIEWS_CARROTS_CREATE_OR_UPDATE_FORM = "carrots/createOrUpdateCarrotForm";
 
-    public List<Carrot> getAllCarrots() {
-        List<Carrot> carrots = new ArrayList<>();
-        carrotRepository.findAll().forEach((t) -> carrots.add(t));
-        return carrots;
-    }
+	@Autowired
+	private BunnyRepository bunnyRepository;
 
-    public Carrot getCarrot(Long id) {
-        return carrotRepository.findById(id).get();
-    }
+	@Autowired
+	private CarrotRepository carrotRepository;
 
-    public void addCarrot(Carrot carrot) {
-        carrotRepository.save(carrot);
-    }
+	public List<Carrot> getAllCarrots() {
+		List<Carrot> carrots = new ArrayList<>();
+		carrotRepository.findAll().forEach((t) -> carrots.add(t));
+		return carrots;
+	}
 
-    public void updateCarrot(Carrot carrot) {
-        carrotRepository.save(carrot);
-    }
-    
-    public void deleteCarrot(Long id) {
-        carrotRepository.delete(getCarrot(id));
-    }
+	public Carrot getCarrot(Long id) {
+		return carrotRepository.findById(id).get();
+	}
 
-    public Collection<CarrotType> populateCarrotTypes() {
-        return carrotRepository.findCarrotTypes();
-    }
+	public void addCarrot(Carrot carrot) {
+		carrotRepository.save(carrot);
+	}
 
-    public Bunny findBunny(long bunnyId) {
-        return bunnyRepository.findById(bunnyId).get();
-    }
+	public void updateCarrot(Carrot carrot) {
+		carrotRepository.save(carrot);
+	}
 
-    public void initBunnyBinder(WebDataBinder dataBinder) {
-        dataBinder.setDisallowedFields("id");
-    }
+	public void deleteCarrot(Long id) {
+		carrotRepository.delete(getCarrot(id));
+	}
 
-    public void initCarrotBinder(WebDataBinder dataBinder) {
-        dataBinder.setValidator(new CarrotValidator());
-    }
+	public Collection<CarrotType> populateCarrotTypes() {
+		return carrotRepository.findCarrotTypes();
+	}
 
-    public String initCreationForm(Bunny bunny, ModelMap model) {
-        Carrot carrot = new Carrot();
-        bunny.addCarrot(carrot);
-        model.put("carrot", carrot);
-        return VIEWS_CARROTS_CREATE_OR_UPDATE_FORM;
-    }
+	public Bunny findBunny(long bunnyId) {
+		return bunnyRepository.findById(bunnyId).get();
+	}
 
-    public String processCreationForm(Bunny bunny, Carrot carrot, BindingResult result, ModelMap model) {
-        if (StringUtils.hasLength(carrot.getName()) && carrot.isNew() && bunny.getCarrot(carrot.getName(), true) != null) {
-            result.rejectValue("name", "duplicate", "already exists");
-        }
-        bunny.addCarrot(carrot);
-        if (result.hasErrors()) {
-            model.put("carrot", carrot);
-            return VIEWS_CARROTS_CREATE_OR_UPDATE_FORM;
-        } else {
-            carrotRepository.save(carrot);
-            return "redirect:/bunnies/{bunnyId}"; // + {bunnyId}
-        }
-    }
+	public void initBunnyBinder(WebDataBinder dataBinder) {
+		dataBinder.setDisallowedFields("id");
+	}
 
-    public String initUpdateForm(long carrotId, ModelMap model) {
-        Carrot carrot = carrotRepository.findById(carrotId).get();
-        model.put("carrot", carrot);
-        return VIEWS_CARROTS_CREATE_OR_UPDATE_FORM;
-    }
+	public void initCarrotBinder(WebDataBinder dataBinder) {
+		dataBinder.setValidator(new CarrotValidator());
+	}
 
-    public String processUpdateForm(Carrot carrot, BindingResult result, Bunny bunny, ModelMap model) {
-        if (result.hasErrors()) {
-            carrot.setBunny(bunny);
-            model.put("carrot", carrot);
-            return VIEWS_CARROTS_CREATE_OR_UPDATE_FORM;
-        } else {
-            bunny.addCarrot(carrot);
-            carrotRepository.save(carrot);
-            return "redirect:/bunnies/{bunnyId}"; // + {bunnyId}
-        }
-    }
+	public String initCreationForm(Bunny bunny, ModelMap model) {
+		Carrot carrot = new Carrot();
+		bunny.addCarrot(carrot);
+		model.put("carrot", carrot);
+		return VIEWS_CARROTS_CREATE_OR_UPDATE_FORM;
+	}
 
+	public String processCreationForm(Bunny bunny, Carrot carrot, BindingResult result, ModelMap model) {
+		if (StringUtils.hasLength(carrot.getName()) && carrot.isNew()
+				&& bunny.getCarrot(carrot.getName(), true) != null) {
+			result.rejectValue("name", "duplicate", "already exists");
+		}
+		bunny.addCarrot(carrot);
+		if (result.hasErrors()) {
+			model.put("carrot", carrot);
+			return VIEWS_CARROTS_CREATE_OR_UPDATE_FORM;
+		}
+		else {
+			carrotRepository.save(carrot);
+			return "redirect:/bunnies/{bunnyId}"; // + {bunnyId}
+		}
+	}
 
-    
+	public String initUpdateForm(long carrotId, ModelMap model) {
+		Carrot carrot = carrotRepository.findById(carrotId).get();
+		model.put("carrot", carrot);
+		return VIEWS_CARROTS_CREATE_OR_UPDATE_FORM;
+	}
+
+	public String processUpdateForm(Carrot carrot, BindingResult result, Bunny bunny, ModelMap model) {
+		if (result.hasErrors()) {
+			carrot.setBunny(bunny);
+			model.put("carrot", carrot);
+			return VIEWS_CARROTS_CREATE_OR_UPDATE_FORM;
+		}
+		else {
+			bunny.addCarrot(carrot);
+			carrotRepository.save(carrot);
+			return "redirect:/bunnies/{bunnyId}"; // + {bunnyId}
+		}
+	}
+
 }

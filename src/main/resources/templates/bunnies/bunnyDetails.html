@@ -1,55 +1,51 @@
 <!DOCTYPE html>
 
 <html xmlns:th="https://www.thymeleaf.org"
-  th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
+  th:replace="~{fragments/layout :: layout (~{::body},'bunnies')}">
 
   <body>
   
   
-    <h2>Owner Information</h2>
+    <h2>Bunny Information</h2>
   
   
-    <table class="table table-striped" th:object="${owner}">
+    <table class="table table-striped" th:object="${bunny}">
       <tr>
-        <th>Name</th>
-        <td><b th:text="*{firstName + ' ' + lastName}"></b></td>
+        <th>Title</th>
+        <td><b th:text="*{title}"></b></td>
       </tr>
       <tr>
-        <th>Address</th>
-        <td th:text="*{address}" /></td>
+        <th>Where</th>
+        <td th:text="*{where}" /></td>
       </tr>
       <tr>
-        <th>City</th>
-        <td th:text="*{city}" /></td>
-      </tr>
-      <tr>
-        <th>Telephone</th>
-        <td th:text="*{telephone}" /></td>
+        <th>StartDate</th>
+        <td th:text="*{startDate}" /></td>
       </tr>
     </table>
   
-    <a th:href="@{{id}/edit(id=${owner.id})}" class="btn btn-default">Edit
-      Owner</a>
-    <a th:href="@{{id}/pets/new(id=${owner.id})}" class="btn btn-default">Add
-      New Pet</a>
+    <a th:href="@{{id}/edit(id=${bunny.id})}" class="btn btn-default">Edit
+      bunny</a>
+    <a th:href="@{{id}/carrots/new(id=${bunny.id})}" class="btn btn-default">Add
+      New Carrot</a>
   
     <br />
     <br />
     <br />
-    <h2>Pets and Visits</h2>
+    <h2>Carrots and Visits</h2>
   
     <table class="table table-striped">
   
-      <tr th:each="pet : ${owner.pets}">
+      <tr th:each="carrot : ${bunny.carrots}">
         <td valign="top">
           <dl class="dl-horizontal">
             <dt>Name</dt>
-            <dd th:text="${pet.name}" /></dd>
-            <dt>Birth Date</dt>
+            <dd th:text="${carrot.name}" /></dd>
+            <dt>Start Date</dt>
             <dd
-              th:text="${#temporals.format(pet.birthDate, 'yyyy-MM-dd')}" /></dd>
+              th:text="${#temporals.format(carrot.startDate, 'yyyy-MM-dd')}" /></dd>
             <dt>Type</dt>
-            <dd th:text="${pet.type}" /></dd>
+            <dd th:text="${carrot.type}" /></dd>
           </dl>
         </td>
         <td valign="top">
@@ -60,16 +56,16 @@
                 <th>Description</th>
               </tr>
             </thead>
-            <tr th:each="visit : ${pet.visits}">
+            <tr th:each="visit : ${carrot.visits}">
               <td th:text="${#temporals.format(visit.date, 'yyyy-MM-dd')}"></td>
               <td th:text="${visit?.description}"></td>
             </tr>
             <tr>
               <td><a
-                th:href="@{{ownerId}/pets/{petId}/edit(ownerId=${owner.id},petId=${pet.id})}">Edit
-                  Pet</a></td>
+                th:href="@{{bunnyId}/carrots/{carrotId}/edit(bunnyId=${bunny.id},carrotId=${carrot.id})}">Edit
+                  Carrot</a></td>
               <td><a
-                th:href="@{{ownerId}/pets/{petId}/visits/new(ownerId=${owner.id},petId=${pet.id})}">Add
+                th:href="@{{bunnyId}/carrots/{carrotId}/visits/new(bunnyId=${bunny.id},carrotId=${carrot.id})}">Add
                   Visit</a></td>
             </tr>
           </table>

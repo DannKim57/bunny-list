@@ -1,34 +1,34 @@
 <html xmlns:th="https://www.thymeleaf.org"
-  th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
+  th:replace="~{fragments/layout :: layout (~{::body},'bunnies')}">
 
 <body>
 
   <h2>
-    <th:block th:if="${pet['new']}">New </th:block>
-    Pet
+    <th:block th:if="${carrot['new']}">New </th:block>
+    Carrot
   </h2>
-  <form th:object="${pet}" class="form-horizontal" method="post">
+  <form th:object="${carrot}" class="form-horizontal" method="post">
     <input type="hidden" name="id" th:value="*{id}" />
     <div class="form-group has-feedback">
       <div class="form-group">
-        <label class="col-sm-2 control-label">Owner</label>
+        <label class="col-sm-2 control-label">Bunny</label>
         <div class="col-sm-10">
-          <span th:text="${pet.owner?.firstName + ' ' + pet.owner?.lastName}" />
+          <span th:text="${carrot.bunny?.title}" />
         </div>
       </div>
       <input
         th:replace="~{fragments/inputField :: input ('Name', 'name', 'text')}" />
       <input
-        th:replace="~{fragments/inputField :: input ('Birth Date', 'birthDate', 'date')}" />
+        th:replace="~{fragments/inputField :: input ('Start Date', 'startDate', 'date')}" />
       <input
         th:replace="~{fragments/selectField :: select ('Type', 'type', ${types})}" />
     </div>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
         <button
-          th:with="text=${pet['new']} ? 'Add Pet' : 'Update Pet'"
+          th:with="text=${carrot['new']} ? 'Add Carrot' : 'Update Carrot'"
           class="btn btn-default" type="submit" th:text="${text}">Add
-          Pet</button>
+          Carrot</button>
       </div>
     </div>
   </form>

@@ -20,6 +20,7 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
@@ -35,6 +36,7 @@ public class Bunny implements Serializable{
     @Column(name = "_where")
     private String where;
     @Column(name = "start_Date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @NotEmpty
     private LocalDate startDate;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bunny")

@@ -94,20 +94,20 @@ public class BunnylistController {
     }
 
     @GetMapping("/bunnies/{bunnyId}/edit") 
-    public String initUpdateBunnyForm(@PathVariable("bunnyId") long bunnyId, Model model) {
+    public String initUpdateBunnyForm(@PathVariable("bunnyId") Long bunnyId, Model model) {
         String ans = bunnyService.initUpdateBunnyForm(bunnyId, model);
         return ans;
     }
 
     @PostMapping("/bunnies/{bunnyId}/edit")
     public String processUpdateBunnyForm(@Valid Bunny bunny, BindingResult result,
-                @PathVariable("bunnyId") long bunnyId) {
+                @PathVariable("bunnyId") Long bunnyId) {
         String ans = bunnyService.processUpdateBunnyForm(bunny, result, bunnyId);
         return ans;
     }
 
     @GetMapping("/bunnies/{bunnyId}") 
-    public ModelAndView showBunny(@PathVariable("bunnyId") long bunnyId) {
+    public ModelAndView showBunny(@PathVariable("bunnyId") Long bunnyId) {
         ModelAndView ans = bunnyService.showBunny(bunnyId);
         return ans;
     }
@@ -121,7 +121,7 @@ public class BunnylistController {
     }
 
     @ModelAttribute("bunny")
-    public Bunny findBunny(@PathVariable("bunnyId") long bunnyId) {
+    public Bunny findBunny(@PathVariable("bunnyId") Long bunnyId) {
         Bunny ans = carrotService.findBunny(bunnyId);
         return ans;
     }
@@ -149,7 +149,7 @@ public class BunnylistController {
     }
 
     @GetMapping("/carrots/{carrotId}/edit")
-    public String initUpdateForm(@PathVariable("carrotId") long carrotId, ModelMap model) {
+    public String initUpdateForm(@PathVariable("carrotId") Long carrotId, ModelMap model) {
         String ans = carrotService.initUpdateForm(carrotId, model);
         return ans;
     }
@@ -167,13 +167,13 @@ public class BunnylistController {
     }
 
     @ModelAttribute("visit")
-    public Visit loadCarrotWithVisit(@PathVariable("carrotId") long carrotId, Map<String, Object> model) {
+    public Visit loadCarrotWithVisit(@PathVariable("carrotId") Long carrotId, Map<String, Object> model) {
         Visit ans = visitService.loadCarrotWithVisit(carrotId, model);
         return ans;
     }
 
     @GetMapping("/bunnies/*/carrots/{carrotId}/visit/new")
-    public String initNewVisitForm(@PathVariable("carrotId") long carrotId, Map<String, Object> model) {
+    public String initNewVisitForm(@PathVariable("carrotId") Long carrotId, Map<String, Object> model) {
         String ans = visitService.initNewVisitForm(carrotId, model);
         return ans;
     }

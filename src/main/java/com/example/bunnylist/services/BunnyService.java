@@ -23,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Service
 public class BunnyService {
 
-    private static final String VIEWS_BUNNY_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
+    private static final String VIEWS_BUNNY_CREATE_OR_UPDATE_FORM = "bunnies/createOrUpdateOwnerForm";
 
     private Logger logger = LoggerFactory.getLogger(BunnyService.class);
     @Autowired

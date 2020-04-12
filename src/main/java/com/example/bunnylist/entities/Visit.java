@@ -25,7 +25,7 @@ public class Visit {
     @NotEmpty
     @Column(name = "description")
     private String description;
-    @Column(name = "carrotId")
+    @Column(name = "carrot_id")
     private Long carrotId;
 
     public Visit() {

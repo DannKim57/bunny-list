@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 
-<html xmlns:th="https://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
+<html xmlns:th="https://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'bunnies')}">
 
   <body>
 
-    <h2>Owners</h2>
+    <h2>Bunnies</h2>
 
-    <table id="owners" class="table table-striped">
+    <table id="bunnies" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 150px;">Name</th>
-            <th style="width: 200px;">Address</th>
-            <th>City</th>
-            <th style="width: 120px">Telephone</th>
-            <th>Pets</th>
+            <th style="width: 150px;">Title</th>
+            <th style="width: 200px;">Where</th>
+            <th style="width: 120px">Start Date</th>
+            <th>Carrots</th>
         </tr>
         </thead>
         <tbody>
-          <tr th:each="owner : ${selections}">
+          <tr th:each="bunny : ${selections}">
               <td>
-                  <a th:href="@{/owners/__${owner.id}__}" th:text="${owner.firstName + ' ' + owner.lastName}"/></a>
+                  <a th:href="@{/bunnies/__${bunny.id}__}" th:text="${bunny.title}"/></a>
               </td>
-              <td th:text="${owner.address}"/>
-              <td th:text="${owner.city}"/>
-              <td th:text="${owner.telephone}"/>
-              <td><span th:each="pet : ${owner.pets}" th:text="${pet.name} "/></td>
+              <td th:text="${bunny.where}"/>
+              <td th:text="${bunny.startDate}"/>
+              <td><span th:each="carrot : ${bunny.carrots}" th:text="${carrot.name} "/></td>
           </tr>
         </tbody>
     </table>

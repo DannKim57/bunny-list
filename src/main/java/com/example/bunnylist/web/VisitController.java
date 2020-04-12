@@ -44,7 +44,7 @@ public class VisitController {
         return visit;
     }
 
-    @GetMapping("/bunnies/*/carrots/{carrotId}/visit/new")
+    @GetMapping("/bunnies/*/carrots/{carrotId}/visits/new")
     public String initNewVisitForm(@PathVariable("carrotId") Long carrotId, Map<String, Object> model) {
         return "carrots/createOrUpdateVisitForm";
     }

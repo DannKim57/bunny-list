@@ -1,10 +1,10 @@
 <html xmlns:th="https://www.thymeleaf.org"
-  th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
+  th:replace="~{fragments/layout :: layout (~{::body},'bunnies')}">
 
 <body>
 
-  <h2>Owner</h2>
-  <form th:object="${owner}" class="form-horizontal" id="add-owner-form" method="post">
+  <h2>Bunny</h2>
+  <form th:object="${bunny}" class="form-horizontal" id="add-bunny-form" method="post">
     <div class="form-group has-feedback">
       <input
         th:replace="~{fragments/inputField :: input ('Title', 'title', 'text')}" />

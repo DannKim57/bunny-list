@@ -1,5 +1,5 @@
 <html xmlns:th="https://www.thymeleaf.org"
-  th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
+  th:replace="~{fragments/layout :: layout (~{::body},'bunnies')}">
 
 <body>
 
@@ -8,23 +8,23 @@
     Visit
   </h2>
 
-  <b>Pet</b>
+  <b>Carrot</b>
   <table class="table table-striped">
     <thead>
       <tr>
         <th>Name</th>
-        <th>Birth Date</th>
+        <th>Start Date</th>
         <th>Type</th>
-        <th>Owner</th>
+        <th>Bunny</th>
       </tr>
     </thead>
     <tr>
-      <td th:text="${pet.name}" /></td>
+      <td th:text="${carrot.name}" /></td>
       <td
-        th:text="${#temporals.format(pet.birthDate, 'yyyy-MM-dd')}" /></td>
-      <td th:text="${pet.type}" /></td>
+        th:text="${#temporals.format(carrot.startDate, 'yyyy-MM-dd')}" /></td>
+      <td th:text="${carrot.type}" /></td>
       <td
-        th:text="${pet.owner?.firstName + ' ' + pet.owner?.lastName}" /></td>
+        th:text="${carrot.bunny?.title}" /></td>
     </tr>
   </table>
 
@@ -38,7 +38,7 @@
 
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <input type="hidden" name="petId" th:value="${pet.id}" />
+        <input type="hidden" name="carrotId" th:value="${carrot.id}" />
         <button class="btn btn-default" type="submit">Add Visit</button>
       </div>
     </div>
@@ -51,7 +51,7 @@
       <th>Date</th>
       <th>Description</th>
     </tr>
-    <tr th:if="${!visit['new']}" th:each="visit : ${pet.visits}">
+    <tr th:if="${!visit['new']}" th:each="visit : ${carrot.visits}">
       <td th:text="${#temporals.format(visit.date, 'yyyy-MM-dd')}" /></td>
       <td th:text=" ${visit.description}" /></td>
     </tr>

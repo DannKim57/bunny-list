@@ -65,6 +65,6 @@ public class Visit {
         this.carrotId = carrotId;
     }
 
-    
+    // visit.. 
     
 }

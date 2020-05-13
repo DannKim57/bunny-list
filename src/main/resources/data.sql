@@ -11,5 +11,5 @@ INSERT INTO types VALUES (6, 'flowers');
 INSERT INTO bunnies VALUES (1, '2010-09-07', 'Davis', 'Suwon');
 INSERT INTO bunnies VALUES (5, '2019-08-25', 'Amy', 'Seoul');
 
-INSERT INTO carrots VALUES (1, 'Leo', '2010-09-07', 5, 1);
-INSERT INTO carrots VALUES (2, 'Basil', '2012-08-06', 5, 6);
+INSERT INTO carrots VALUES (1, 'Leo', '2020-09-07', 5, 1);
+INSERT INTO carrots VALUES (2, 'Basil', '2020-08-06', 5, 6);
